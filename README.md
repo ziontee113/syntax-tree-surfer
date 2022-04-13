@@ -1,0 +1,1 @@
+# syntax-tree-surfer.nvim
