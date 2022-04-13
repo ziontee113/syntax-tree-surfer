@@ -1,4 +1,5 @@
-![tree surfing cover](https://user-images.githubusercontent.com/102876811/163169473-b7ba4582-699f-4b18-ba6b-eddc22302ef1.jpg)
+![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
+
 
 
 # syntax-tree-surfer.nvim
