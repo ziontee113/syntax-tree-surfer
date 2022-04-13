@@ -49,3 +49,5 @@ vim.api.nvim_set_keymap("x", "L", '<cmd>lua require("syntax-tree-surfer").surf("
 vim.api.nvim_set_keymap("x", "<A-j>", '<cmd>lua require("syntax-tree-surfer").surf("next", "visual", true)<cr>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap("x", "<A-k>", '<cmd>lua require("syntax-tree-surfer").surf("prev", "visual", true)<cr>', {noremap = true, silent = true})
 ```
+
+# Now start Surfing! 🌊
