@@ -1,7 +1,7 @@
 ![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
 
 
-# syntax-tree-surfer
+# syntax-tree-surfer 🌊
 ### Syntax Tree Surfer is a plugin for Neovim that helps you surf through your document and move elements around using the nvim-treesitter API.
 
 # What does it do?
@@ -50,4 +50,4 @@ vim.api.nvim_set_keymap("x", "<A-j>", '<cmd>lua require("syntax-tree-surfer").su
 vim.api.nvim_set_keymap("x", "<A-k>", '<cmd>lua require("syntax-tree-surfer").surf("prev", "visual", true)<cr>', {noremap = true, silent = true})
 ```
 
-# Now start Surfing! 🌊
+# Now start Surfing! 🤽‍♀️
