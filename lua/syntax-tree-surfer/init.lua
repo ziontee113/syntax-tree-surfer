@@ -59,6 +59,7 @@ M.surf = function(direction, mode, move)
 		vim.cmd("normal! o")
 		local nodeB = ts_utils.get_node_at_cursor()
 		vim.cmd("normal! o")
+		local root = ts_utils.get_root_for_node(node)
 
 		if nodeA:id() ~= nodeB:id() then --> get the true node
 			local true_range = find_range_from_2nodes(nodeA, nodeB)
@@ -71,16 +72,23 @@ M.surf = function(direction, mode, move)
 				or end_row_P ~= true_range[3]
 				or end_col_P ~= true_range[4]
 			do
+				if parent:parent() == nil then
+					break
+				end
 				parent = parent:parent()
 				start_row_P, start_col_P, end_row_P, end_col_P = parent:range()
 			end
 
 			node = parent
 		end
+
+		if node == root then -- catch some edge cases
+			node = nodeA
+		end
 	end
 
 	local parent = node:parent() --> if parent only has 1 child, move up the tree
-	while parent:named_child_count() == 1 do
+	while parent ~= nil and parent:named_child_count() == 1 do
 		node = parent
 		parent = node:parent()
 	end
