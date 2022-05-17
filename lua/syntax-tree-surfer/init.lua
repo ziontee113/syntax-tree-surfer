@@ -2,7 +2,7 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 
 local M = {}
 
-local function find_range_from_2nodes(nodeA, nodeB)
+local function find_range_from_2nodes(nodeA, nodeB) --{{{
 	local start_row_A, start_col_A, end_row_A, end_col_A = nodeA:range()
 	local start_row_B, start_col_B, end_row_B, end_col_B = nodeB:range()
 
@@ -44,9 +44,9 @@ local function find_range_from_2nodes(nodeA, nodeB)
 	end
 
 	return true_range
-end
+end --}}}
 
-M.surf = function(direction, mode, move)
+M.surf = function(direction, mode, move) --{{{
 	local node = ts_utils.get_node_at_cursor() -- declare node and bufnr
 	local bufnr = vim.api.nvim_get_current_buf()
 
@@ -135,20 +135,20 @@ M.surf = function(direction, mode, move)
 			end
 		end
 	end
-end
+end --}}}
 
-M.select_current_node = function()
+M.select_current_node = function() --{{{
 	local node = ts_utils.get_node_at_cursor()
 	local bufnr = vim.api.nvim_get_current_buf()
 
 	if node ~= nil then
 		ts_utils.update_selection(bufnr, node)
 	end
-end
+end --}}}
 
 ---
 
-local function get_master_node(block_check)
+local function get_master_node(block_check) --{{{
 	local node = ts_utils.get_node_at_cursor()
 	if node == nil then
 		error("No Treesitter parser found")
@@ -170,16 +170,16 @@ local function get_master_node(block_check)
 	end
 
 	return node
-end
+end --}}}
 
-M.select = function()
+M.select = function() --{{{
 	local node = get_master_node()
 	local bufnr = vim.api.nvim_get_current_buf()
 
 	ts_utils.update_selection(bufnr, node)
-end
+end --}}}
 
-M.move = function(mode, up)
+M.move = function(mode, up) --{{{
 	local node = get_master_node(true)
 	local bufnr = vim.api.nvim_get_current_buf()
 
@@ -211,6 +211,42 @@ M.move = function(mode, up)
 			ts_utils.update_selection(bufnr, target)
 		end
 	end
-end
+end --}}}
+
+--- version 1.1
+
+local function get_top_node() --{{{
+	local node = ts_utils.get_node_at_cursor()
+	if node == nil then
+		error("No Treesitter parser found")
+	end
+
+	local root = ts_utils.get_root_for_node(node)
+
+	local start_row = node:start()
+	local parent = node:parent()
+
+	while parent ~= nil and parent ~= root do
+		node = parent
+		parent = node:parent()
+	end
+
+	return node
+end --}}}
+
+local function go_to_top_node(go_to_end) --{{{
+	local node = get_top_node()
+	ts_utils.goto_node(node, go_to_end)
+end --}}}
+
+M.go_to_top_node_and_execute_commands = function(go_to_end, list_of_commands) --{{{
+	go_to_top_node(go_to_end)
+
+	vim.schedule(function()
+		for _, command in ipairs(list_of_commands) do
+			vim.cmd(command)
+		end
+	end)
+end --}}}
 
 return M
