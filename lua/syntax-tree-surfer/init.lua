@@ -242,6 +242,7 @@ end --}}}
 M.go_to_top_node_and_execute_commands = function(go_to_end, list_of_commands) --{{{
 	go_to_top_node(go_to_end)
 
+	-- I want to create a function at the top level
 	vim.schedule(function()
 		for _, command in ipairs(list_of_commands) do
 			vim.cmd(command)
