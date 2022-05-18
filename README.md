@@ -1,6 +1,3 @@
-![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
-
-
 # 🌳 syntax-tree-surfer 🌳🌊
 ### Syntax Tree Surfer is a plugin for Neovim that helps you surf through your document and move elements around using the nvim-treesitter API.
 
@@ -9,6 +6,23 @@
 ### **Navigate** around your document based on Treesitter's abstract Syntax Tree. Step into, step out, step over, step back.
 
 https://user-images.githubusercontent.com/102876811/163170843-a7c9f1a1-4ffb-4a39-9636-fc81521bd9b5.mp4
+
+---
+### Version 1.1 update
+
+This feature will help you save some keystrokes & brain power when you want to create some code at the top level node of your current cursor position.
+
+```lua
+lua require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, { "normal! O", "normal! O", "startinsert" })<cr>
+```
+
+The .go_to_top_node_and_execute_commands() method takes 2 arguments:
+
+1. boolean: if false then it will jump to the beginning of the node, if true it jumps to the end.
+
+1. lua table: a table that contains strings, each tring is a vim command example: { "normal! O", "normal! O", "startinsert" }
+
+---
 
 ### **Move / Swap** elements around based on your visual selection
 
