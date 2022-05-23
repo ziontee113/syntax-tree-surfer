@@ -102,6 +102,7 @@ end, opts)
 -- Setup Function example:
 -- These are the default options:
 require("syntax-tree-surfer").setup({
+	highlight_group = "STS_highlight",
 	disable_no_instance_found_report = false,
 	default_desired_types = {
 		"function",
