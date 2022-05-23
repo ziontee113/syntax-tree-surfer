@@ -1,6 +1,8 @@
 # 🌳 syntax-tree-surfer 🌳🌊
 ### Syntax Tree Surfer is a plugin for Neovim that helps you surf through your document and move elements around using the nvim-treesitter API.
 
+![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
+
 # What does it do?
 
 ### **Navigate** around your document based on Treesitter's abstract Syntax Tree. Step into, step out, step over, step back.
