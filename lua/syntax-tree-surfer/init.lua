@@ -257,7 +257,10 @@ end --}}}
 -- Imports & Aliases{{{
 M.opts = {
 	disable_no_instance_found_report = false,
+	highlight_group = "STS_highlight",
 }
+
+vim.cmd(":highlight STS_highlight guifg=#00F1F5")
 
 local api = vim.api
 local ns = api.nvim_create_namespace("tree_testing_ns")
@@ -457,7 +460,7 @@ local function print_types(desired_types) -- ///2{{{
 		end
 	end
 
-	local color_group = "DapUIScope"
+	local color_group = "STS_highlight"
 
 	-- loop backwards through nodes_before_cursor
 	local count = 1
@@ -647,7 +650,7 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 						start_row,
 						start_col,
 						M.opts.icon_dictionary[nodes[next_closest_node_index + 1]:type()],
-						"DapUIScope",
+						"STS_highlight",
 						800
 					)
 					next_closest_node_index = next_closest_node_index + 1
@@ -659,7 +662,7 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 						start_row,
 						start_col,
 						M.opts.icon_dictionary[nodes[previous_closest_node_index - 1]:type()],
-						"DapUIScope",
+						"STS_highlight",
 						800
 					)
 					previous_closest_node_index = previous_closest_node_index - 1
