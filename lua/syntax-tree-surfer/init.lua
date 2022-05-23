@@ -460,7 +460,7 @@ local function print_types(desired_types) -- ///2{{{
 		end
 	end
 
-	local color_group = "STS_highlight"
+	local color_group = M.opts.highlight_group
 
 	-- loop backwards through nodes_before_cursor
 	local count = 1
@@ -650,7 +650,7 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 						start_row,
 						start_col,
 						M.opts.icon_dictionary[nodes[next_closest_node_index + 1]:type()],
-						"STS_highlight",
+						M.opts.highlight_group,
 						800
 					)
 					next_closest_node_index = next_closest_node_index + 1
@@ -662,7 +662,7 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 						start_row,
 						start_col,
 						M.opts.icon_dictionary[nodes[previous_closest_node_index - 1]:type()],
-						"STS_highlight",
+						M.opts.highlight_group,
 						800
 					)
 					previous_closest_node_index = previous_closest_node_index - 1
