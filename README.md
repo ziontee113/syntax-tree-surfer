@@ -3,12 +3,12 @@
 
 ![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
 
-# Version 2.0 Beta Update:
+# Version 2.0 Beta Update ⚡
 
-### Targeted Jump with Virtual Text
+### Targeted Jump with Virtual Text 🆕
 https://user-images.githubusercontent.com/102876811/169820839-5ec66bd9-bf14-49f6-8e5a-3078b8ec43c4.mp4
 
-### Filtered Jump through user-defined node types
+### Filtered Jump through user-defined node types 🆕
 https://user-images.githubusercontent.com/102876811/169820922-b1eefa5e-6ed9-4ebd-95d1-f3f35e0388da.mp4
 
 ### These are experimental features and I wish to expand them even further. If you have any suggestions, please feel free to let me know 😊
@@ -16,7 +16,7 @@ https://user-images.githubusercontent.com/102876811/169820922-b1eefa5e-6ed9-4ebd
 Example mappings for Version 2.0 Beta functionalities:
 ```lua
 -- Syntax Tree Surfer V2 Mappings
--- jump with virtual_text
+-- Targeted Jump with virtual_text
 local stf = require("syntax-tree-surfer")
 vim.keymap.set("n", "gv", function() -- only jump to variable_declarations
 	stf.targeted_jump({ "variable_declaration" })
