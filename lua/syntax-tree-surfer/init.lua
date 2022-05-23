@@ -276,7 +276,7 @@ local current_desired_types = {
 local current_syntax_nodes = {} -- hash table of nodes for each buffer, gets cleared when TextChanged event is triggered}}}
 
 -- Dictionary{{{
-local icon_dictionary = {
+M.opts.icon_dictionary = {
 	["if_statement"] = "",
 	["else_clause"] = "",
 	["else_statement"] = "",
@@ -289,10 +289,10 @@ local icon_dictionary = {
 }
 
 -- Possible keymaps for jumping
-local left_hand_side = "fdsawervcxqtzb"
-left_hand_side = vim.split(left_hand_side, "")
-local right_hand_side = "jkl;oiu.,mpy/n"
-right_hand_side = vim.split(right_hand_side, "") --}}}
+M.opts.left_hand_side = "fdsawervcxqtzb"
+M.opts.left_hand_side = vim.split(M.opts.left_hand_side, "")
+M.opts.right_hand_side = "jkl;oiu.,mpy/n"
+M.opts.right_hand_side = vim.split(M.opts.right_hand_side, "") --}}}
 
 -- Utils (Getters)
 local function recursive_child_iter(node, table_to_insert, desired_types) -- {{{
@@ -466,24 +466,24 @@ local function print_types(desired_types) -- ///2{{{
 		local node_type = node:type()
 		local start_row, start_col = node:range()
 
-		if not left_hand_side[count] then
+		if not M.opts.left_hand_side[count] then
 			break
 		end
 
 		if has_value(desired_types, node_type) then
 			api.nvim_buf_set_extmark(0, ns, start_row, start_col - 1, {
-				virt_text = { { left_hand_side[count], color_group } },
+				virt_text = { { M.opts.left_hand_side[count], color_group } },
 				virt_text_pos = "overlay",
 			})
 
 			api.nvim_buf_set_extmark(0, ns, start_row, -1, {
-				virt_text = { { " " .. left_hand_side[count] .. " <-- " .. node_type, color_group } },
+				virt_text = { { " " .. M.opts.left_hand_side[count] .. " <-- " .. node_type, color_group } },
 				virt_text_pos = "overlay",
 			})
 
-			hash_table[left_hand_side[count]] = {}
-			hash_table[left_hand_side[count]].start_row = start_row
-			hash_table[left_hand_side[count]].start_col = start_col
+			hash_table[M.opts.left_hand_side[count]] = {}
+			hash_table[M.opts.left_hand_side[count]].start_row = start_row
+			hash_table[M.opts.left_hand_side[count]].start_col = start_col
 
 			count = count + 1
 		end
@@ -495,24 +495,24 @@ local function print_types(desired_types) -- ///2{{{
 		local node_type = node:type()
 		local start_row, start_col = node:range()
 
-		if not right_hand_side[count] then
+		if not M.opts.right_hand_side[count] then
 			break
 		end
 
 		if has_value(desired_types, node_type) then
 			api.nvim_buf_set_extmark(0, ns, start_row, start_col - 1, {
-				virt_text = { { right_hand_side[count], color_group } },
+				virt_text = { { M.opts.right_hand_side[count], color_group } },
 				virt_text_pos = "overlay",
 			})
 
 			api.nvim_buf_set_extmark(0, ns, start_row, -1, {
-				virt_text = { { " " .. right_hand_side[count] .. " <-- " .. node_type, color_group } },
+				virt_text = { { " " .. M.opts.right_hand_side[count] .. " <-- " .. node_type, color_group } },
 				virt_text_pos = "overlay",
 			})
 
-			hash_table[right_hand_side[count]] = {}
-			hash_table[right_hand_side[count]].start_row = start_row
-			hash_table[right_hand_side[count]].start_col = start_col
+			hash_table[M.opts.right_hand_side[count]] = {}
+			hash_table[M.opts.right_hand_side[count]].start_row = start_row
+			hash_table[M.opts.right_hand_side[count]].start_col = start_col
 
 			count = count + 1
 		end
@@ -646,7 +646,7 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 					set_extmark_then_delete_it(
 						start_row,
 						start_col,
-						icon_dictionary[nodes[next_closest_node_index + 1]:type()],
+						M.opts.icon_dictionary[nodes[next_closest_node_index + 1]:type()],
 						"DapUIScope",
 						800
 					)
@@ -658,7 +658,7 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 					set_extmark_then_delete_it(
 						start_row,
 						start_col,
-						icon_dictionary[nodes[previous_closest_node_index - 1]:type()],
+						M.opts.icon_dictionary[nodes[previous_closest_node_index - 1]:type()],
 						"DapUIScope",
 						800
 					)
@@ -683,7 +683,7 @@ vim.api.nvim_create_autocmd({
 	end,
 }) --}}}
 
--- Methods to return ///1{{{
+-- Methods to return {{{
 M.filtered_jump = go_to_next_instance
 M.targeted_jump = print_types --}}}
 
@@ -695,6 +695,12 @@ M.setup = function(opts)
 				current_desired_types = value
 			else
 				M.opts[key] = value
+
+				if key == "left_hand_side" then
+					M.opts.left_hand_side = vim.split(value, "")
+				elseif key == "right_hand_side" then
+					M.opts.right_hand_side = vim.split(value, "")
+				end
 			end
 		end
 	end
