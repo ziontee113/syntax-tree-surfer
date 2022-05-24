@@ -437,7 +437,7 @@ local function has_value(tab, val) --{{{
 end --}}}
 
 -- Functions to Execute --
-local function print_types(desired_types) -- ///2{{{
+local function print_types(desired_types) -- {{{
 	current_desired_types = desired_types
 
 	local nodes = get_nodes_in_array()
@@ -685,11 +685,9 @@ vim.api.nvim_create_autocmd({
 		current_syntax_nodes[current_buffer] = nil
 	end,
 }) --}}}
-
 -- Methods to return {{{
 M.filtered_jump = go_to_next_instance
 M.targeted_jump = print_types --}}}
-
 -- Setup Function{{{
 M.setup = function(opts)
 	if opts then
