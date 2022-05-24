@@ -3,6 +3,13 @@
 
 ![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
 
+## Table of Contents
+
+1. [Version 2.0 Beta Update](#version-20-beta-update-)
+1. [Basic Functionalities](#basic-functionalities)
+2. [Version 1.1 Update](#version-11-update)
+3. [How do I install?](#how-do-i-install)
+
 # Version 2.0 Beta Update ⚡
 
 ### Targeted Jump with Virtual Text 🆕
@@ -167,7 +174,12 @@ The .go_to_top_node_and_execute_commands() method takes 2 arguments:
 ---
 
 # How do I install?
-### I don't know! This is my first plugin! Use the github link with your favorite Package Manager and hope for the best! 🥳
+### Use your favorite Plugin Manager with the link [ziontee113/syntax-tree-surfer](ziontee113/syntax-tree-surfer)
+
+For Packer:
+```lua
+use "ziontee113/syntax-tree-surfer"
+```
 
 
 # How do I set things up?
