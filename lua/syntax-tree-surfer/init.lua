@@ -409,6 +409,10 @@ local function set_extmark_then_delete_it(start_row, start_col, contents, color_
 	-- 	start_col = 1
 	-- end
 
+	if not contents then
+		contents = ""
+	end
+
 	local extmark_id = api.nvim_buf_set_extmark(0, ns, start_row, start_col - 0, {
 		virt_text = { { contents, color_group } },
 		virt_text_pos = "overlay",
