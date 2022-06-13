@@ -1,4 +1,5 @@
 # 🌳 syntax-tree-surfer 🌳🌊
+
 ### Syntax Tree Surfer is a plugin for Neovim that helps you surf through your document and move elements around using the nvim-treesitter API.
 
 ![tree surfing cover](https://user-images.githubusercontent.com/102876811/163170119-89369c35-a061-4058-aaeb-1706ea6fa4cf.jpg)
@@ -7,20 +8,23 @@
 
 1. [Version 2.0 Beta Update](#version-20-beta-update-)
 1. [Basic Functionalities](#basic-functionalities)
-2. [Version 1.1 Update](#version-11-update)
-3. [How do I install?](#how-do-i-install)
+1. [Version 1.1 Update](#version-11-update)
+1. [How do I install?](#how-do-i-install)
 
 # Version 2.0 Beta Update ⚡
 
 ### Targeted Jump with Virtual Text 🆕
+
 https://user-images.githubusercontent.com/102876811/169820839-5ec66bd9-bf14-49f6-8e5a-3078b8ec43c4.mp4
 
 ### Filtered Jump through user-defined node types 🆕
+
 https://user-images.githubusercontent.com/102876811/169820922-b1eefa5e-6ed9-4ebd-95d1-f3f35e0388da.mp4
 
 ### These are experimental features and I wish to expand them even further. If you have any suggestions, please feel free to let me know 😊
 
 Example mappings for Version 2.0 Beta functionalities:
+
 ```lua
 -- Syntax Tree Surfer V2 Mappings
 -- Targeted Jump with virtual_text
@@ -136,6 +140,7 @@ require("syntax-tree-surfer").setup({
 	},
 })
 ```
+
 ### Because every languages have different schemas and node-types, you can check the node-types that you're interested in with https://github.com/nvim-treesitter/playground
 
 ### I'll try to incorporate a simple function to tell what kind of node is the cursor is on natively so you don't have to install a separate plugin soon :)
@@ -177,37 +182,40 @@ The .go_to_top_node_and_execute_commands() method takes 2 arguments:
 ---
 
 # How do I install?
+
 ### Use your favorite Plugin Manager with the link [ziontee113/syntax-tree-surfer](ziontee113/syntax-tree-surfer)
 
 For Packer:
+
 ```lua
 use "ziontee113/syntax-tree-surfer"
 ```
 
-
 # How do I set things up?
+
 ### Here's my suggestion:
 
-``` lua
+```lua
 -- Syntax Tree Surfer
+local opts = {noremap = true, silent = true}
 
 -- Normal Mode Swapping
-vim.api.nvim_set_keymap("n", "vd", '<cmd>lua require("syntax-tree-surfer").move("n", false)<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "vu", '<cmd>lua require("syntax-tree-surfer").move("n", true)<cr>', {noremap = true, silent = true})
--- .select() will show you what you will be swapping with .move(), you'll get used to .select() and .move() behavior quite soon!
-vim.api.nvim_set_keymap("n", "vx", '<cmd>lua require("syntax-tree-surfer").select()<cr>', {noremap = true, silent = true})
--- .select_current_node() will select the current node at your cursor
-vim.api.nvim_set_keymap("n", "vn", '<cmd>lua require("syntax-tree-surfer").select_current_node()<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "vd", ':STSSwapDownNormal<cr>', opts)
+vim.api.nvim_set_keymap("n", "vu", ':STSSwapUpNormal<cr>', opts)
 
--- NAVIGATION: Only change the keymap to your liking. I would not recommend changing anything about the .surf() parameters!
-vim.api.nvim_set_keymap("x", "J", '<cmd>lua require("syntax-tree-surfer").surf("next", "visual")<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap("x", "K", '<cmd>lua require("syntax-tree-surfer").surf("prev", "visual")<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap("x", "H", '<cmd>lua require("syntax-tree-surfer").surf("parent", "visual")<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap("x", "L", '<cmd>lua require("syntax-tree-surfer").surf("child", "visual")<cr>', {noremap = true, silent = true})
+-- Visual Selection from Normal Mode
+vim.api.nvim_set_keymap("n", "vx", ':STSSelectMasterNode<cr>', opts)
+vim.api.nvim_set_keymap("n", "vn", ':STSSelectCurrentNode<cr>', opts)
 
--- SWAPPING WITH VISUAL SELECTION: Only change the keymap to your liking. Don't change the .surf() parameters!
-vim.api.nvim_set_keymap("x", "<A-j>", '<cmd>lua require("syntax-tree-surfer").surf("next", "visual", true)<cr>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap("x", "<A-k>", '<cmd>lua require("syntax-tree-surfer").surf("prev", "visual", true)<cr>', {noremap = true, silent = true})
+-- Select Nodes in Visual Mode
+vim.api.nvim_set_keymap("x", "J", ':STSSelectNextSiblingNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "K", ':STSSelectPrevSiblingNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "H", ':STSSelectParentNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "L", ':STSSelectFirstChildNode<cr>', opts)
+
+-- Swapping Nodes in Visual Mode
+vim.api.nvim_set_keymap("x", "<A-j>", ':STSSwapNextVisual<cr>', opts)
+vim.api.nvim_set_keymap("x", "<A-k>", ':STSSwapPrevVisual<cr>', opts)
 ```
 
 # Now let's start Tree Surfing! 🌲💦
