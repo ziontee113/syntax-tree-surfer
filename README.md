@@ -200,22 +200,22 @@ use "ziontee113/syntax-tree-surfer"
 local opts = {noremap = true, silent = true}
 
 -- Normal Mode Swapping
-vim.api.nvim_set_keymap("n", "vd", ':STSSwapDownNormal<cr>', opts)
-vim.api.nvim_set_keymap("n", "vu", ':STSSwapUpNormal<cr>', opts)
+vim.api.nvim_set_keymap("n", "vd", '<cmd>STSSwapDownNormal<cr>', opts)
+vim.api.nvim_set_keymap("n", "vu", '<cmd>STSSwapUpNormal<cr>', opts)
 
 -- Visual Selection from Normal Mode
-vim.api.nvim_set_keymap("n", "vx", ':STSSelectMasterNode<cr>', opts)
-vim.api.nvim_set_keymap("n", "vn", ':STSSelectCurrentNode<cr>', opts)
+vim.api.nvim_set_keymap("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
+vim.api.nvim_set_keymap("n", "vn", '<cmd>STSSelectCurrentNode<cr>', opts)
 
 -- Select Nodes in Visual Mode
-vim.api.nvim_set_keymap("x", "J", ':STSSelectNextSiblingNode<cr>', opts)
-vim.api.nvim_set_keymap("x", "K", ':STSSelectPrevSiblingNode<cr>', opts)
-vim.api.nvim_set_keymap("x", "H", ':STSSelectParentNode<cr>', opts)
-vim.api.nvim_set_keymap("x", "L", ':STSSelectFirstChildNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "J", '<cmd>STSSelectNextSiblingNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "K", '<cmd>STSSelectPrevSiblingNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "H", '<cmd>STSSelectParentNode<cr>', opts)
+vim.api.nvim_set_keymap("x", "L", '<cmd>STSSelectFirstChildNode<cr>', opts)
 
 -- Swapping Nodes in Visual Mode
-vim.api.nvim_set_keymap("x", "<A-j>", ':STSSwapNextVisual<cr>', opts)
-vim.api.nvim_set_keymap("x", "<A-k>", ':STSSwapPrevVisual<cr>', opts)
+vim.api.nvim_set_keymap("x", "<A-j>", '<cmd>STSSwapNextVisual<cr>', opts)
+vim.api.nvim_set_keymap("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>', opts)
 ```
 
 # Now let's start Tree Surfing! 🌲💦
