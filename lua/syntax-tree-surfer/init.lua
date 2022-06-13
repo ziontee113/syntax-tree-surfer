@@ -215,7 +215,7 @@ M.move = function(mode, up) --{{{
 	end
 end --}}}
 
---! Create User Commands for 1.0 functionalities !
+--! Create User Commands for 1.0 functionalities !{{{
 
 -- Swap in Normal Mode
 vim.api.nvim_create_user_command("STSSwapUpNormal", function()
@@ -253,7 +253,7 @@ vim.api.nvim_create_user_command("STSSwapNextVisual", function()
 end, {})
 vim.api.nvim_create_user_command("STSSwapPrevVisual", function()
 	M.surf("prev", "visual", true)
-end, {})
+end, {}) --}}}
 
 --- version 1.1
 
