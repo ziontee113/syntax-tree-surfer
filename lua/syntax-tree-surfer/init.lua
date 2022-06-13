@@ -215,6 +215,38 @@ M.move = function(mode, up) --{{{
 	end
 end --}}}
 
+--! Create User Commands for 1.0 functionalities !--
+
+-- Swap in Normal Mode
+vim.api.nvim_create_user_command("STFSwapUpNormal", function()
+	M.move("n", true)
+end, {})
+vim.api.nvim_create_user_command("STFSwapDownNormal", function()
+	M.move("n", false)
+end, {})
+
+-- Select Node from Normal Mode
+vim.api.nvim_create_user_command("STFSelectCurrentNode", function()
+	M.select_current_node()
+end, {})
+vim.api.nvim_create_user_command("STFSelectMasterNode", function()
+	M.select()
+end, {})
+
+-- Select Node from Visual Mode
+vim.api.nvim_create_user_command("STFSelectParentNodeVisual", function()
+	M.surf("parent", "visual")
+end, {})
+vim.api.nvim_create_user_command("STFSelectChildNodeVisual", function()
+	M.surf("child", "visual")
+end, {})
+vim.api.nvim_create_user_command("STFSelectPrevSiblingNodeVisual", function()
+	M.surf("prev", "visual")
+end, {})
+vim.api.nvim_create_user_command("STFSelectNextSiblingNodeVisual", function()
+	M.surf("next", "visual")
+end, {})
+
 --- version 1.1
 
 local function get_top_node() --{{{
@@ -289,6 +321,7 @@ M.opts.icon_dictionary = {
 	["switch_statement"] = "ﳟ",
 	["function"] = "",
 	["variable_declaration"] = "",
+	["comment"] = "",
 }
 
 -- Possible keymaps for jumping
@@ -713,4 +746,4 @@ end --}}}
 
 return M
 
--- vim: foldmethod=marker foldmarker={{{,}}}
+-- vim: foldmethod=marker foldmarker={{{,}}} foldlevel=0
