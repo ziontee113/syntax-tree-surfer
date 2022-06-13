@@ -147,7 +147,23 @@ require("syntax-tree-surfer").setup({
 
 ---
 
-# Basic Functionalities
+### Version 1.1 update
+
+This feature will help you save some keystrokes & brain power when you want to create some code at the top level node of your current cursor position.
+
+```lua
+lua require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, { "normal! O", "normal! O", "startinsert" })<cr>
+```
+
+The .go_to_top_node_and_execute_commands() method takes 2 arguments:
+
+1. boolean: if false then it will jump to the beginning of the node, if true it jumps to the end.
+
+1. lua table: a table that contains strings, each tring is a vim command example: { "normal! O", "normal! O", "startinsert" }
+
+---
+
+# Version 1.0 Functionalities
 
 ### **Navigate** around your document based on Treesitter's abstract Syntax Tree. Step into, step out, step over, step back.
 
@@ -165,25 +181,9 @@ https://user-images.githubusercontent.com/102876811/163171686-4ad49b7a-9fd3-41d5
 
 https://user-images.githubusercontent.com/102876811/163173466-b4bfd70f-c239-4e9c-a7ae-c540c093e0f4.mp4
 
-### Version 1.1 update
-
-This feature will help you save some keystrokes & brain power when you want to create some code at the top level node of your current cursor position.
-
-```lua
-lua require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, { "normal! O", "normal! O", "startinsert" })<cr>
-```
-
-The .go_to_top_node_and_execute_commands() method takes 2 arguments:
-
-1. boolean: if false then it will jump to the beginning of the node, if true it jumps to the end.
-
-1. lua table: a table that contains strings, each tring is a vim command example: { "normal! O", "normal! O", "startinsert" }
-
----
-
 # How do I install?
 
-### Use your favorite Plugin Manager with the link [ziontee113/syntax-tree-surfer](ziontee113/syntax-tree-surfer)
+#### Use your favorite Plugin Manager with the link [ziontee113/syntax-tree-surfer](ziontee113/syntax-tree-surfer)
 
 For Packer:
 
