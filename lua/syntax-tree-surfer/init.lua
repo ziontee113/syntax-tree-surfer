@@ -215,36 +215,44 @@ M.move = function(mode, up) --{{{
 	end
 end --}}}
 
---! Create User Commands for 1.0 functionalities !--
+--! Create User Commands for 1.0 functionalities !
 
 -- Swap in Normal Mode
-vim.api.nvim_create_user_command("STFSwapUpNormal", function()
+vim.api.nvim_create_user_command("STSSwapUpNormal", function()
 	M.move("n", true)
 end, {})
-vim.api.nvim_create_user_command("STFSwapDownNormal", function()
+vim.api.nvim_create_user_command("STSSwapDownNormal", function()
 	M.move("n", false)
 end, {})
 
 -- Select Node from Normal Mode
-vim.api.nvim_create_user_command("STFSelectCurrentNode", function()
+vim.api.nvim_create_user_command("STSSelectCurrentNode", function()
 	M.select_current_node()
 end, {})
-vim.api.nvim_create_user_command("STFSelectMasterNode", function()
+vim.api.nvim_create_user_command("STSSelectMasterNode", function()
 	M.select()
 end, {})
 
 -- Select Node from Visual Mode
-vim.api.nvim_create_user_command("STFSelectParentNodeVisual", function()
+vim.api.nvim_create_user_command("STSSelectParentNode", function()
 	M.surf("parent", "visual")
 end, {})
-vim.api.nvim_create_user_command("STFSelectChildNodeVisual", function()
+vim.api.nvim_create_user_command("STSSelectChildNode", function()
 	M.surf("child", "visual")
 end, {})
-vim.api.nvim_create_user_command("STFSelectPrevSiblingNodeVisual", function()
+vim.api.nvim_create_user_command("STSSelectPrevSiblingNode", function()
 	M.surf("prev", "visual")
 end, {})
-vim.api.nvim_create_user_command("STFSelectNextSiblingNodeVisual", function()
+vim.api.nvim_create_user_command("STSSelectNextSiblingNode", function()
 	M.surf("next", "visual")
+end, {})
+
+-- Swap in Visual Mode
+vim.api.nvim_create_user_command("STSSwapNextVisual", function()
+	M.surf("next", "visual", true)
+end, {})
+vim.api.nvim_create_user_command("STSSwapPrevVisual", function()
+	M.surf("prev", "visual", true)
 end, {})
 
 --- version 1.1
