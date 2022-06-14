@@ -7,9 +7,9 @@
 ## Table of Contents
 
 1. [Version 2.0 Beta Update](#version-20-beta-update-)
-1. [Basic Functionalities](#basic-functionalities)
 1. [Version 1.1 Update](#version-11-update)
-1. [How do I install?](#how-do-i-install)
+1. [Version 1.0 Functionalities](#version-10-functionalities)
+3. [How do I install?](#how-do-i-install)
 
 # Version 2.0 Beta Update ⚡
 
