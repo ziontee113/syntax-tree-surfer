@@ -208,6 +208,8 @@ vim.keymap.set("n", "vd", function()
 	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
 	return "g@l"
 end, { silent = true, expr = true })
+
+--> If the mappings above don't work, use these instead (no dot repeatable)
 -- vim.api.nvim_set_keymap("n", "vd", '<cmd>STSSwapDownNormal<cr>', opts)
 -- vim.api.nvim_set_keymap("n", "vu", '<cmd>STSSwapUpNormal<cr>', opts)
 
