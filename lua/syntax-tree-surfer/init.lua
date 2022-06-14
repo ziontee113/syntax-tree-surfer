@@ -734,12 +734,6 @@ vim.api.nvim_create_autocmd({
 M.filtered_jump = go_to_next_instance
 M.targeted_jump = print_types --}}}
 -- Setup Function{{{
-local function map_user_mappings(args)
-	for key, value in pairs(table) do
-		-- TODO: how the fuck do we do this???
-	end
-end
-
 M.setup = function(opts)
 	if opts then
 		for key, value in pairs(opts) do
@@ -752,12 +746,18 @@ M.setup = function(opts)
 					M.opts.left_hand_side = vim.split(value, "")
 				elseif key == "right_hand_side" then
 					M.opts.right_hand_side = vim.split(value, "")
-				elseif key == "user_mappings" then
-					map_user_mappings(value)
 				end
 			end
 		end
 	end
+end --}}}
+
+-- Global Variables for Normal Swap Dot Repeat{{{
+_G.STSSwapUpNormal_Dot = function()
+	vim.cmd("STSSwapUpNormal")
+end
+_G.STSSwapDownNormal_Dot = function()
+	vim.cmd("STSSwapDownNormal")
 end --}}}
 
 return M

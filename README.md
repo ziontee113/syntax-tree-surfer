@@ -199,9 +199,17 @@ use "ziontee113/syntax-tree-surfer"
 -- Syntax Tree Surfer
 local opts = {noremap = true, silent = true}
 
--- Normal Mode Swapping
-vim.api.nvim_set_keymap("n", "vd", '<cmd>STSSwapDownNormal<cr>', opts)
-vim.api.nvim_set_keymap("n", "vu", '<cmd>STSSwapUpNormal<cr>', opts)
+-- Normal Mode Swapping: Dot Repeatable
+vim.keymap.set("n", "vu", function()
+	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+vim.keymap.set("n", "vd", function()
+	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+-- vim.api.nvim_set_keymap("n", "vd", '<cmd>STSSwapDownNormal<cr>', opts)
+-- vim.api.nvim_set_keymap("n", "vu", '<cmd>STSSwapUpNormal<cr>', opts)
 
 -- Visual Selection from Normal Mode
 vim.api.nvim_set_keymap("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
