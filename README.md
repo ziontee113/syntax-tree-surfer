@@ -179,6 +179,8 @@ https://user-images.githubusercontent.com/102876811/163171686-4ad49b7a-9fd3-41d5
 
 ### **Swap in Normal Mode** (limited support)
 
+#### Now supports Dot . Repeat
+
 https://user-images.githubusercontent.com/102876811/163173466-b4bfd70f-c239-4e9c-a7ae-c540c093e0f4.mp4
 
 # How do I install?
