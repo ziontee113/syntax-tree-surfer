@@ -224,6 +224,12 @@ end, {})
 vim.api.nvim_create_user_command("STSSwapDownNormal", function()
 	M.move("n", false)
 end, {})
+vim.api.nvim_create_user_command("STSSwapCurrentNodePrevNormal", function()
+	M.surf("prev", "normal", true)
+end, {})
+vim.api.nvim_create_user_command("STSSwapCurrentNodeNextNormal", function()
+	M.surf("next", "normal", true)
+end, {})
 
 -- Select Node from Normal Mode
 vim.api.nvim_create_user_command("STSSelectCurrentNode", function()
@@ -254,6 +260,20 @@ end, {})
 vim.api.nvim_create_user_command("STSSwapPrevVisual", function()
 	M.surf("prev", "visual", true)
 end, {}) --}}}
+
+-- Global Variables for Normal Swap Dot Repeat{{{
+_G.STSSwapCurrentNodePrevNormal_Dot = function()
+	vim.cmd("STSSwapCurrentNodePrevNormal")
+end
+_G.STSSwapCurrentNodeNextNormal_Dot = function()
+	vim.cmd("STSSwapCurrentNodeNextNormal")
+end
+_G.STSSwapUpNormal_Dot = function()
+	vim.cmd("STSSwapUpNormal")
+end
+_G.STSSwapDownNormal_Dot = function()
+	vim.cmd("STSSwapDownNormal")
+end --}}}
 
 --- version 1.1
 
@@ -750,14 +770,6 @@ M.setup = function(opts)
 			end
 		end
 	end
-end --}}}
-
--- Global Variables for Normal Swap Dot Repeat{{{
-_G.STSSwapUpNormal_Dot = function()
-	vim.cmd("STSSwapUpNormal")
-end
-_G.STSSwapDownNormal_Dot = function()
-	vim.cmd("STSSwapDownNormal")
 end --}}}
 
 return M

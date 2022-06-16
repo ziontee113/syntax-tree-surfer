@@ -200,18 +200,31 @@ use "ziontee113/syntax-tree-surfer"
 local opts = {noremap = true, silent = true}
 
 -- Normal Mode Swapping: Dot Repeatable
-vim.keymap.set("n", "vu", function()
+-- Swap The Master Node relative to the cursor with it's siblings
+vim.keymap.set("n", "vU", function()
 	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
 	return "g@l"
 end, { silent = true, expr = true })
-vim.keymap.set("n", "vd", function()
+vim.keymap.set("n", "vD", function()
 	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
 	return "g@l"
 end, { silent = true, expr = true })
 
+-- Swap Current Node at the Cursor with it's siblings
+vim.keymap.set("n", "vd", function()
+	vim.opt.opfunc = "v:lua.STSSwapCurrentNodePrevNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+vim.keymap.set("n", "vu", function()
+	vim.opt.opfunc = "v:lua.STSSwapCurrentNodeNextNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+
 --> If the mappings above don't work, use these instead (no dot repeatable)
--- vim.keymap.set("n", "vd", '<cmd>STSSwapDownNormal<cr>', opts)
--- vim.keymap.set("n", "vu", '<cmd>STSSwapUpNormal<cr>', opts)
+-- vim.keymap.set("n", "vd", '<cmd>STSSwapCurrentNodeNextNormal<cr>', opts)
+-- vim.keymap.set("n", "vu", '<cmd>STSSwapCurrentNodePrevNormal<cr>', opts)
+-- vim.keymap.set("n", "vD", '<cmd>STSSwapDownNormal<cr>', opts)
+-- vim.keymap.set("n", "vU", '<cmd>STSSwapUpNormal<cr>', opts)
 
 -- Visual Selection from Normal Mode
 vim.keymap.set("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
