@@ -9,7 +9,7 @@
 1. [Version 2.0 Beta Update](#version-20-beta-update-)
 1. [Version 1.1 Update](#version-11-update)
 1. [Version 1.0 Functionalities](#version-10-functionalities)
-3. [How do I install?](#how-do-i-install)
+1. [How do I install?](#how-do-i-install)
 
 # Version 2.0 Beta Update ⚡
 
@@ -28,21 +28,21 @@ Example mappings for Version 2.0 Beta functionalities:
 ```lua
 -- Syntax Tree Surfer V2 Mappings
 -- Targeted Jump with virtual_text
-local stf = require("syntax-tree-surfer")
+local sts = require("syntax-tree-surfer")
 vim.keymap.set("n", "gv", function() -- only jump to variable_declarations
-	stf.targeted_jump({ "variable_declaration" })
+	sts.targeted_jump({ "variable_declaration" })
 end, opts)
 vim.keymap.set("n", "gfu", function() -- only jump to functions
-	stf.targeted_jump({ "function" })
+	sts.targeted_jump({ "function", "function_definition" })
 end, opts)
 vim.keymap.set("n", "gif", function() -- only jump to if_statements
-	stf.targeted_jump({ "if_statement" })
+	sts.targeted_jump({ "if_statement" })
 end, opts)
 vim.keymap.set("n", "gfo", function() -- only jump to for_statements
-	stf.targeted_jump({ "for_statement" })
+	sts.targeted_jump({ "for_statement" })
 end, opts)
 vim.keymap.set("n", "gj", function() -- jump to all that you specify
-	stf.targeted_jump({
+	sts.targeted_jump({
 		"function",
 	  "if_statement",
 		"else_clause",
@@ -58,22 +58,22 @@ end, opts)
 -- filtered_jump --
 -- "default" means that you jump to the default_desired_types or your lastest jump types
 vim.keymap.set("n", "<A-n>", function()
-	stf.filtered_jump("default", true) --> true means jump forward
+	sts.filtered_jump("default", true) --> true means jump forward
 end, opts)
 vim.keymap.set("n", "<A-p>", function()
-	stf.filtered_jump("default", false) --> false means jump backwards
+	sts.filtered_jump("default", false) --> false means jump backwards
 end, opts)
 
 -- non-default jump --> custom desired_types
 vim.keymap.set("n", "your_keymap", function()
-	stf.filtered_jump({
+	sts.filtered_jump({
 		"if_statement",
 		"else_clause",
 		"else_statement",
 	}, true) --> true means jump forward
 end, opts)
 vim.keymap.set("n", "your_keymap", function()
-	stf.filtered_jump({
+	sts.filtered_jump({
 		"if_statement",
 		"else_clause",
 		"else_statement",
@@ -84,26 +84,26 @@ end, opts)
 -- jump with limited targets --
 -- jump to sibling nodes only
 vim.keymap.set("n", "-", function()
-	stf.filtered_jump({
+	sts.filtered_jump({
 		"if_statement",
 		"else_clause",
 		"else_statement",
 	}, false, { destination = "siblings" })
 end, opts)
 vim.keymap.set("n", "=", function()
-	stf.filtered_jump({ "if_statement", "else_clause", "else_statement" }, true, { destination = "siblings" })
+	sts.filtered_jump({ "if_statement", "else_clause", "else_statement" }, true, { destination = "siblings" })
 end, opts)
 
 -- jump to parent or child nodes only
 vim.keymap.set("n", "_", function()
-	stf.filtered_jump({
+	sts.filtered_jump({
 		"if_statement",
 		"else_clause",
 		"else_statement",
 	}, false, { destination = "parent" })
 end, opts)
 vim.keymap.set("n", "+", function()
-	stf.filtered_jump({
+	sts.filtered_jump({
 		"if_statement",
 		"else_clause",
 		"else_statement",
@@ -117,6 +117,7 @@ require("syntax-tree-surfer").setup({
 	disable_no_instance_found_report = false,
 	default_desired_types = {
 		"function",
+		"function_definition",
 		"if_statement",
 		"else_clause",
 		"else_statement",
@@ -136,6 +137,7 @@ require("syntax-tree-surfer").setup({
 		["while_statement"] = "ﯩ",
 		["switch_statement"] = "ﳟ",
 		["function"] = "",
+		["function_definition"] = "",
 		["variable_declaration"] = "",
 	},
 })
