@@ -34,6 +34,9 @@ vim.keymap.set("n", "gv", function() -- only jump to variable_declarations
 end, opts)
 vim.keymap.set("n", "gfu", function() -- only jump to functions
 	sts.targeted_jump({ "function", "function_definition" })
+  --> In this example, the Lua language schema uses "function",
+  --  when the Python language uses "function_definition"
+  --  we include both, so this keymap will work on both languages
 end, opts)
 vim.keymap.set("n", "gif", function() -- only jump to if_statements
 	sts.targeted_jump({ "if_statement" })
