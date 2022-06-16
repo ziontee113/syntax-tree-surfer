@@ -535,7 +535,12 @@ local function print_types(desired_types) -- {{{
 		end
 
 		if has_value(desired_types, node_type) then
-			api.nvim_buf_set_extmark(0, ns, start_row, start_col - 1, {
+			if start_col - 1 < 0 then
+				start_col = 0
+			else
+				start_col = start_col - 1
+			end
+			api.nvim_buf_set_extmark(0, ns, start_row, start_col, {
 				virt_text = { { M.opts.left_hand_side[count], color_group } },
 				virt_text_pos = "overlay",
 			})
@@ -564,7 +569,12 @@ local function print_types(desired_types) -- {{{
 		end
 
 		if has_value(desired_types, node_type) then
-			api.nvim_buf_set_extmark(0, ns, start_row, start_col - 1, {
+			if start_col - 1 < 0 then
+				start_col = 0
+			else
+				start_col = start_col - 1
+			end
+			api.nvim_buf_set_extmark(0, ns, start_row, start_col, {
 				virt_text = { { M.opts.right_hand_side[count], color_group } },
 				virt_text_pos = "overlay",
 			})
