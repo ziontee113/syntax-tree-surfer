@@ -391,12 +391,8 @@ local function get_nodes_in_array() --{{{
 	local current_buffer = vim.api.nvim_get_current_buf()
 	local nodes = {}
 
-	if current_syntax_nodes[current_buffer] then
-		nodes = current_syntax_nodes[current_buffer]
-	else
-		recursive_child_iter(root, nodes)
-		current_syntax_nodes[current_buffer] = nodes
-	end
+	recursive_child_iter(root, nodes)
+	current_syntax_nodes[current_buffer] = nodes
 
 	return nodes
 end --}}}
@@ -737,19 +733,6 @@ local function go_to_next_instance(desired_types, forward, opts) --{{{
 	end
 end --}}}
 
--- Autocmds{{{
-local augroup = vim.api.nvim_create_augroup("STS_augroup", { clear = true })
-vim.api.nvim_create_autocmd({
-	"TextChanged",
-	-- "TextChangedI"
-}, {
-	buffer = 0,
-	group = augroup,
-	callback = function()
-		local current_buffer = vim.api.nvim_get_current_buf()
-		current_syntax_nodes[current_buffer] = nil
-	end,
-}) --}}}
 -- Methods to return {{{
 M.filtered_jump = go_to_next_instance
 M.targeted_jump = print_types --}}}
