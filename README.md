@@ -147,6 +147,7 @@ require("syntax-tree-surfer").setup({
 ```
 
 ### Because every languages have different schemas and node-types, you can check the node-types that you're interested in with https://github.com/nvim-treesitter/playground
+#### You can also do a quick check using the command :STSPrintNodesAtCursor
 
 ### I'll try to incorporate a simple function to tell what kind of node is the cursor is on natively so you don't have to install a separate plugin soon :)
 

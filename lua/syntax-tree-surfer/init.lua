@@ -334,9 +334,7 @@ local current_desired_types = {
 	"for_statement",
 	"while_statement",
 	"switch_statement",
-} -- default desired types
-
-local current_syntax_nodes = {} -- hash table of nodes for each buffer, gets cleared when TextChanged event is triggered}}}
+} -- default desired types }}}
 
 -- Dictionary{{{
 M.opts.icon_dictionary = {
@@ -392,7 +390,6 @@ local function get_nodes_in_array() --{{{
 	local nodes = {}
 
 	recursive_child_iter(root, nodes)
-	current_syntax_nodes[current_buffer] = nodes
 
 	return nodes
 end --}}}
@@ -538,7 +535,8 @@ local function print_types(desired_types) -- {{{
 			if start_col - 1 < 0 then
 				start_col = 0
 			else
-				start_col = start_col - 1
+				-- start_col = start_col - 1
+				start_col = start_col
 			end
 			api.nvim_buf_set_extmark(0, ns, start_row, start_col, {
 				virt_text = { { M.opts.left_hand_side[count], color_group } },
@@ -572,7 +570,8 @@ local function print_types(desired_types) -- {{{
 			if start_col - 1 < 0 then
 				start_col = 0
 			else
-				start_col = start_col - 1
+				-- start_col = start_col - 1
+				start_col = start_col
 			end
 			api.nvim_buf_set_extmark(0, ns, start_row, start_col, {
 				virt_text = { { M.opts.right_hand_side[count], color_group } },
@@ -608,7 +607,6 @@ local function print_types(desired_types) -- {{{
 	api.nvim_buf_clear_namespace(0, ns, 0, -1)
 end --}}}
 local function go_to_next_instance(desired_types, forward, opts) --{{{
-	-- if desired_types == "default"
 	if desired_types == "default" then
 		desired_types = current_desired_types
 	end
@@ -764,6 +762,37 @@ M.setup = function(opts)
 		end
 	end
 end --}}}
+
+-- version 2.1
+
+local function get_raw_parent_nodes(node) --{{{
+	local parents = {}
+
+	while node:parent() do
+		node = node:parent()
+
+		table.insert(parents, node)
+	end
+
+	return parents
+end --}}}
+
+local function print_nodes_at_cursor() --{{{
+	local current_node = ts_utils.get_node_at_cursor()
+
+	local parents = get_raw_parent_nodes(current_node)
+
+	local types = { current_node:type() }
+	for _, node in ipairs(parents) do
+		table.insert(types, node:type())
+	end
+
+	print(vim.inspect(types))
+end --}}}
+
+vim.api.nvim_create_user_command("STSPrintNodesAtCursor", function()
+	print_nodes_at_cursor()
+end, {})
 
 return M
 
