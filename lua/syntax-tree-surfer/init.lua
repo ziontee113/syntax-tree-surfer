@@ -538,7 +538,8 @@ local function print_types(desired_types) -- {{{
 			if start_col - 1 < 0 then
 				start_col = 0
 			else
-				start_col = start_col - 1
+				-- start_col = start_col - 1
+				start_col = start_col
 			end
 			api.nvim_buf_set_extmark(0, ns, start_row, start_col, {
 				virt_text = { { M.opts.left_hand_side[count], color_group } },
@@ -572,7 +573,8 @@ local function print_types(desired_types) -- {{{
 			if start_col - 1 < 0 then
 				start_col = 0
 			else
-				start_col = start_col - 1
+				-- start_col = start_col - 1
+				start_col = start_col
 			end
 			api.nvim_buf_set_extmark(0, ns, start_row, start_col, {
 				virt_text = { { M.opts.right_hand_side[count], color_group } },
@@ -779,7 +781,7 @@ local function get_raw_parent_nodes(node) --{{{
 	return parents
 end --}}}
 
-local function print_the_nodes() --{{{
+local function print_nodes_at_cursor() --{{{
 	local current_node = ts_utils.get_node_at_cursor()
 
 	local parents = get_raw_parent_nodes(current_node)
@@ -793,7 +795,7 @@ local function print_the_nodes() --{{{
 end --}}}
 
 vim.api.nvim_create_user_command("STSPrintNodesAtCursor", function()
-	print_the_nodes()
+	print_nodes_at_cursor()
 end, {})
 
 return M
