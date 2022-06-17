@@ -547,7 +547,7 @@ local function print_types(desired_types) -- {{{
 
 			api.nvim_buf_set_extmark(0, ns, start_row, -1, {
 				virt_text = { { " " .. M.opts.left_hand_side[count] .. " <-- " .. node_type, color_group } },
-				virt_text_pos = "overlay",
+				virt_text_pos = "eol",
 			})
 
 			hash_table[M.opts.left_hand_side[count]] = {}
@@ -581,7 +581,7 @@ local function print_types(desired_types) -- {{{
 
 			api.nvim_buf_set_extmark(0, ns, start_row, -1, {
 				virt_text = { { " " .. M.opts.right_hand_side[count] .. " <-- " .. node_type, color_group } },
-				virt_text_pos = "overlay",
+				virt_text_pos = "eol",
 			})
 
 			hash_table[M.opts.right_hand_side[count]] = {}
