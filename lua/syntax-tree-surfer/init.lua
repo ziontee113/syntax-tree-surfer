@@ -765,6 +765,37 @@ M.setup = function(opts)
 	end
 end --}}}
 
+-- version 2.1
+
+local function get_raw_parent_nodes(node) --{{{
+	local parents = {}
+
+	while node:parent() do
+		node = node:parent()
+
+		table.insert(parents, node)
+	end
+
+	return parents
+end --}}}
+
+local function print_the_nodes() --{{{
+	local current_node = ts_utils.get_node_at_cursor()
+
+	local parents = get_raw_parent_nodes(current_node)
+
+	local types = { current_node:type() }
+	for _, node in ipairs(parents) do
+		table.insert(types, node:type())
+	end
+
+	print(vim.inspect(types))
+end --}}}
+
+vim.api.nvim_create_user_command("STSPrintNodesAtCursor", function()
+	print_the_nodes()
+end, {})
+
 return M
 
 -- vim: foldmethod=marker foldmarker={{{,}}} foldlevel=0
