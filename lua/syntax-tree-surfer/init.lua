@@ -334,9 +334,7 @@ local current_desired_types = {
 	"for_statement",
 	"while_statement",
 	"switch_statement",
-} -- default desired types
-
-local current_syntax_nodes = {} -- hash table of nodes for each buffer, gets cleared when TextChanged event is triggered}}}
+} -- default desired types }}}
 
 -- Dictionary{{{
 M.opts.icon_dictionary = {
@@ -392,7 +390,6 @@ local function get_nodes_in_array() --{{{
 	local nodes = {}
 
 	recursive_child_iter(root, nodes)
-	current_syntax_nodes[current_buffer] = nodes
 
 	return nodes
 end --}}}
@@ -610,7 +607,6 @@ local function print_types(desired_types) -- {{{
 	api.nvim_buf_clear_namespace(0, ns, 0, -1)
 end --}}}
 local function go_to_next_instance(desired_types, forward, opts) --{{{
-	-- if desired_types == "default"
 	if desired_types == "default" then
 		desired_types = current_desired_types
 	end
