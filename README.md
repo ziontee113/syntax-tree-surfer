@@ -21,7 +21,7 @@ https://user-images.githubusercontent.com/102876811/163170843-a7c9f1a1-4ffb-4a39
 
 ### **Move / Swap** elements around based on your visual selection
 
-https://user-images.githubusercontent.com/102876811/163171460-4620be6b-360f-4d39-b025-55c412f54a96.mp4
+<!-- https://user-images.githubusercontent.com/102876811/163171460-4620be6b-360f-4d39-b025-55c412f54a96.mp4 -->
 
 https://user-images.githubusercontent.com/102876811/163171686-4ad49b7a-9fd3-41d5-a2c2-deae1bb41c3d.mp4
 
