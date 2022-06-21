@@ -109,13 +109,13 @@ The .go_to_top_node_and_execute_commands() method takes 2 arguments:
 
 ---
 
-# Version 2.0 Beta Update ⚡
+# Version 2.0 Beta Update
 
-### Targeted Jump with Virtual Text 🆕
+### Targeted Jump with Virtual Text
 
 https://user-images.githubusercontent.com/102876811/169820839-5ec66bd9-bf14-49f6-8e5a-3078b8ec43c4.mp4
 
-### Filtered Jump through user-defined node types 🆕
+### Filtered Jump through user-defined node types
 
 https://user-images.githubusercontent.com/102876811/169820922-b1eefa5e-6ed9-4ebd-95d1-f3f35e0388da.mp4
 
