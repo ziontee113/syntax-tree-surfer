@@ -25,9 +25,9 @@ https://user-images.githubusercontent.com/102876811/163171460-4620be6b-360f-4d39
 
 https://user-images.githubusercontent.com/102876811/163171686-4ad49b7a-9fd3-41d5-a2c2-deae1bb41c3d.mp4
 
-### **Swap in Normal Mode**
+### **Swap in Normal Mode** - Now supports Dot (.) Repeat
 
-#### Now supports Dot . Repeat
+https://user-images.githubusercontent.com/102876811/174811583-52b7beb0-853f-4ac9-9498-eb718ce626d9.mp4
 
 https://user-images.githubusercontent.com/102876811/163173466-b4bfd70f-c239-4e9c-a7ae-c540c093e0f4.mp4
 
