@@ -6,10 +6,108 @@
 
 ## Table of Contents
 
-1. [Version 2.0 Beta Update](#version-20-beta-update-)
-1. [Version 1.1 Update](#version-11-update)
 1. [Version 1.0 Functionalities](#version-10-functionalities)
 1. [How do I install?](#how-do-i-install)
+1. [Version 1.1 Update](#version-11-update)
+1. [Version 2.0 Beta Update](#version-20-beta-update-)
+
+# Version 1.0 Functionalities
+
+### **Navigate** around your document based on Treesitter's abstract Syntax Tree. Step into, step out, step over, step back.
+
+https://user-images.githubusercontent.com/102876811/163170843-a7c9f1a1-4ffb-4a39-9636-fc81521bd9b5.mp4
+
+---
+
+### **Move / Swap** elements around based on your visual selection
+
+https://user-images.githubusercontent.com/102876811/163171460-4620be6b-360f-4d39-b025-55c412f54a96.mp4
+
+https://user-images.githubusercontent.com/102876811/163171686-4ad49b7a-9fd3-41d5-a2c2-deae1bb41c3d.mp4
+
+### **Swap in Normal Mode**
+
+#### Now supports Dot . Repeat
+
+https://user-images.githubusercontent.com/102876811/163173466-b4bfd70f-c239-4e9c-a7ae-c540c093e0f4.mp4
+
+# How do I install?
+
+#### Use your favorite Plugin Manager with the link [ziontee113/syntax-tree-surfer](ziontee113/syntax-tree-surfer)
+
+For Packer:
+
+```lua
+use "ziontee113/syntax-tree-surfer"
+```
+
+# How do I set things up?
+
+### Here's my suggestion:
+
+```lua
+-- Syntax Tree Surfer
+local opts = {noremap = true, silent = true}
+
+-- Normal Mode Swapping:
+-- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
+vim.keymap.set("n", "vU", function()
+	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+vim.keymap.set("n", "vD", function()
+	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+
+-- Swap Current Node at the Cursor with it's siblings, Dot Repeatable
+vim.keymap.set("n", "vd", function()
+	vim.opt.opfunc = "v:lua.STSSwapCurrentNodeNextNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+vim.keymap.set("n", "vu", function()
+	vim.opt.opfunc = "v:lua.STSSwapCurrentNodePrevNormal_Dot"
+	return "g@l"
+end, { silent = true, expr = true })
+
+--> If the mappings above don't work, use these instead (no dot repeatable)
+-- vim.keymap.set("n", "vd", '<cmd>STSSwapCurrentNodeNextNormal<cr>', opts)
+-- vim.keymap.set("n", "vu", '<cmd>STSSwapCurrentNodePrevNormal<cr>', opts)
+-- vim.keymap.set("n", "vD", '<cmd>STSSwapDownNormal<cr>', opts)
+-- vim.keymap.set("n", "vU", '<cmd>STSSwapUpNormal<cr>', opts)
+
+-- Visual Selection from Normal Mode
+vim.keymap.set("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
+vim.keymap.set("n", "vn", '<cmd>STSSelectCurrentNode<cr>', opts)
+
+-- Select Nodes in Visual Mode
+vim.keymap.set("x", "J", '<cmd>STSSelectNextSiblingNode<cr>', opts)
+vim.keymap.set("x", "K", '<cmd>STSSelectPrevSiblingNode<cr>', opts)
+vim.keymap.set("x", "H", '<cmd>STSSelectParentNode<cr>', opts)
+vim.keymap.set("x", "L", '<cmd>STSSelectFirstChildNode<cr>', opts)
+
+-- Swapping Nodes in Visual Mode
+vim.keymap.set("x", "<A-j>", '<cmd>STSSwapNextVisual<cr>', opts)
+vim.keymap.set("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>', opts)
+```
+
+# Now let's start Tree Surfing! 🌲💦
+
+### Version 1.1 update
+
+This feature will help you save some keystrokes & brain power when you want to create some code at the top level node of your current cursor position.
+
+```lua
+lua require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, { "normal! O", "normal! O", "startinsert" })<cr>
+```
+
+The .go_to_top_node_and_execute_commands() method takes 2 arguments:
+
+1. boolean: if false then it will jump to the beginning of the node, if true it jumps to the end.
+
+1. lua table: a table that contains strings, each tring is a vim command example: { "normal! O", "normal! O", "startinsert" }
+
+---
 
 # Version 2.0 Beta Update ⚡
 
@@ -147,106 +245,7 @@ require("syntax-tree-surfer").setup({
 ```
 
 ### Because every languages have different schemas and node-types, you can check the node-types that you're interested in with https://github.com/nvim-treesitter/playground
+
 #### You can also do a quick check using the command :STSPrintNodesAtCursor
 
 ### I'll try to incorporate a simple function to tell what kind of node is the cursor is on natively so you don't have to install a separate plugin soon :)
-
----
-
-### Version 1.1 update
-
-This feature will help you save some keystrokes & brain power when you want to create some code at the top level node of your current cursor position.
-
-```lua
-lua require("syntax-tree-surfer").go_to_top_node_and_execute_commands(false, { "normal! O", "normal! O", "startinsert" })<cr>
-```
-
-The .go_to_top_node_and_execute_commands() method takes 2 arguments:
-
-1. boolean: if false then it will jump to the beginning of the node, if true it jumps to the end.
-
-1. lua table: a table that contains strings, each tring is a vim command example: { "normal! O", "normal! O", "startinsert" }
-
----
-
-# Version 1.0 Functionalities
-
-### **Navigate** around your document based on Treesitter's abstract Syntax Tree. Step into, step out, step over, step back.
-
-https://user-images.githubusercontent.com/102876811/163170843-a7c9f1a1-4ffb-4a39-9636-fc81521bd9b5.mp4
-
----
-
-### **Move / Swap** elements around based on your visual selection
-
-https://user-images.githubusercontent.com/102876811/163171460-4620be6b-360f-4d39-b025-55c412f54a96.mp4
-
-https://user-images.githubusercontent.com/102876811/163171686-4ad49b7a-9fd3-41d5-a2c2-deae1bb41c3d.mp4
-
-### **Swap in Normal Mode** (limited support)
-
-#### Now supports Dot . Repeat
-
-https://user-images.githubusercontent.com/102876811/163173466-b4bfd70f-c239-4e9c-a7ae-c540c093e0f4.mp4
-
-# How do I install?
-
-#### Use your favorite Plugin Manager with the link [ziontee113/syntax-tree-surfer](ziontee113/syntax-tree-surfer)
-
-For Packer:
-
-```lua
-use "ziontee113/syntax-tree-surfer"
-```
-
-# How do I set things up?
-
-### Here's my suggestion:
-
-```lua
--- Syntax Tree Surfer
-local opts = {noremap = true, silent = true}
-
--- Normal Mode Swapping:
--- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
-vim.keymap.set("n", "vU", function()
-	vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-vim.keymap.set("n", "vD", function()
-	vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-
--- Swap Current Node at the Cursor with it's siblings, Dot Repeatable
-vim.keymap.set("n", "vd", function()
-	vim.opt.opfunc = "v:lua.STSSwapCurrentNodeNextNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-vim.keymap.set("n", "vu", function()
-	vim.opt.opfunc = "v:lua.STSSwapCurrentNodePrevNormal_Dot"
-	return "g@l"
-end, { silent = true, expr = true })
-
---> If the mappings above don't work, use these instead (no dot repeatable)
--- vim.keymap.set("n", "vd", '<cmd>STSSwapCurrentNodeNextNormal<cr>', opts)
--- vim.keymap.set("n", "vu", '<cmd>STSSwapCurrentNodePrevNormal<cr>', opts)
--- vim.keymap.set("n", "vD", '<cmd>STSSwapDownNormal<cr>', opts)
--- vim.keymap.set("n", "vU", '<cmd>STSSwapUpNormal<cr>', opts)
-
--- Visual Selection from Normal Mode
-vim.keymap.set("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
-vim.keymap.set("n", "vn", '<cmd>STSSelectCurrentNode<cr>', opts)
-
--- Select Nodes in Visual Mode
-vim.keymap.set("x", "J", '<cmd>STSSelectNextSiblingNode<cr>', opts)
-vim.keymap.set("x", "K", '<cmd>STSSelectPrevSiblingNode<cr>', opts)
-vim.keymap.set("x", "H", '<cmd>STSSelectParentNode<cr>', opts)
-vim.keymap.set("x", "L", '<cmd>STSSelectFirstChildNode<cr>', opts)
-
--- Swapping Nodes in Visual Mode
-vim.keymap.set("x", "<A-j>", '<cmd>STSSwapNextVisual<cr>', opts)
-vim.keymap.set("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>', opts)
-```
-
-# Now let's start Tree Surfing! 🌲💦
