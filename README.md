@@ -91,6 +91,10 @@ vim.keymap.set("x", "<A-j>", '<cmd>STSSwapNextVisual<cr>', opts)
 vim.keymap.set("x", "<A-k>", '<cmd>STSSwapPrevVisual<cr>', opts)
 ```
 
+# Special Thanks To:
+### Dr. David A. Kunz for creating [Let's create a Neovim plugin using Treesitter and Lua](https://www.youtube.com/watch?v=dPQfsASHNkg)
+### NVIM Treesitter Team - https://github.com/nvim-treesitter/nvim-treesitter
+
 # Now let's start Tree Surfing! 🌲💦
 
 ### Version 1.1 update
