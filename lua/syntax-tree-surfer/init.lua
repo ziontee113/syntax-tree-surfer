@@ -312,6 +312,19 @@ M.go_to_top_node_and_execute_commands = function(go_to_end, list_of_commands) --
 	end)
 end --}}}
 
+M.go_to_node_and_execute_commands = function(node, go_to_end, list_of_commands) --{{{
+	ts_utils.goto_node(node, go_to_end)
+
+	-- I want to create a function at the top level
+	vim.schedule(function()
+		for _, command in ipairs(list_of_commands) do
+			command()
+		end
+	end)
+end --}}}
+
+M.get_master_node = get_master_node
+
 -- version 2.0 Beta --
 
 -- Imports & Aliases{{{
