@@ -317,7 +317,7 @@ M.go_to_node_and_execute_commands = function(node, go_to_end, list_of_commands) 
 
 	-- I want to create a function at the top level
 	vim.schedule(function()
-		for _, command in ipairs(list_of_commands) do
+		for _, command in pairs(list_of_commands) do
 			command()
 		end
 	end)
