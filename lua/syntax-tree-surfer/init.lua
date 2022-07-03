@@ -150,6 +150,13 @@ end --}}}
 
 ---
 
+M.jump_to_current_node = function(start_or_end)
+	local node = ts_utils.get_node_at_cursor()
+	ts_utils.goto_node(node, start_or_end, true)
+end
+
+---
+
 local function get_master_node(block_check) --{{{
 	local node = ts_utils.get_node_at_cursor()
 	if node == nil then
@@ -237,6 +244,14 @@ vim.api.nvim_create_user_command("STSSelectCurrentNode", function()
 end, {})
 vim.api.nvim_create_user_command("STSSelectMasterNode", function()
 	M.select()
+end, {})
+
+-- Jump to Node in Normal Mode
+vim.api.nvim_create_user_command("STSJumpToStartOFCurrentNode", function()
+	M.jump_to_current_node(false)
+end, {})
+vim.api.nvim_create_user_command("STSJumpToEndOFCurrentNode", function()
+	M.jump_to_current_node(true)
 end, {})
 
 -- Select Node from Visual Mode
