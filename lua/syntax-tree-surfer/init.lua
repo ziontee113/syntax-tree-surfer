@@ -247,10 +247,10 @@ vim.api.nvim_create_user_command("STSSelectMasterNode", function()
 end, {})
 
 -- Jump to Node in Normal Mode
-vim.api.nvim_create_user_command("STSJumpToStartOFCurrentNode", function()
+vim.api.nvim_create_user_command("STSJumpToStartOfCurrentNode", function()
 	M.jump_to_current_node(false)
 end, {})
-vim.api.nvim_create_user_command("STSJumpToEndOFCurrentNode", function()
+vim.api.nvim_create_user_command("STSJumpToEndOfCurrentNode", function()
 	M.jump_to_current_node(true)
 end, {})
 
